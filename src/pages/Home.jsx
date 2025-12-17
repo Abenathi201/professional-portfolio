@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import HeroSection from '@/components/home/HeroSection';
 import FeaturedWork from '@/components/home/FeaturedWork';
 import Marquee from '@/components/home/Marquee';
-import HalftoneLoader from '@/components/ui/HalftoneLoader';
+import HalftoneLoader from '@/components/ui/HalfToneLoader';
 
 export default function Home() {
   // Fetch site settings
