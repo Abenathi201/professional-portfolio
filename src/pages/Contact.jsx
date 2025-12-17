@@ -29,24 +29,33 @@ export default function Contact() {
     
     setSending(true);
 
-    // Simulate sending (replace with actual email service like EmailJS, Formspree, etc.)
     try {
-      // TODO: Integrate with a real email service
-      // For now, just log the form data and show success
-      console.log('Contact form submitted:', {
-        to: settings.email,
-        from: formData.email,
-        subject: formData.subject || `New message from ${formData.name}`,
-        message: formData.message
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: 'a87aa3f6-d4f0-4402-892d-cc7ffd91b7a2',
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || `New message from ${formData.name}`,
+          message: formData.message,
+          from_name: formData.name,
+        }),
       });
 
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const data = await response.json();
 
-      toast.success('Message sent successfully!');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      if (data.success) {
+        toast.success('Message sent successfully!');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        toast.error('Failed to send message. Please try again.');
+      }
     } catch (error) {
       toast.error('Failed to send message. Please try again.');
+      console.error('Contact form error:', error);
     } finally {
       setSending(false);
     }

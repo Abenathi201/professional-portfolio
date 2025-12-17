@@ -149,7 +149,7 @@ export default function CV() {
 
       <div className="pt-24 md:pt-32">
         {/* Action buttons */}
-        <div className="fixed top-24 right-6 md:right-12 z-40 flex gap-3 no-print">
+        <div className="fixed top-34 md:top-24 right-6 md:right-12 z-40 flex gap-3 no-print">
           <Button
             onClick={handleDownloadClick}
             className="bg-[#d4622a] hover:bg-[#c45520] text-[#1a1814] font-mono text-xs uppercase tracking-wider h-10 px-6 rounded-full flex items-center justify-center"
