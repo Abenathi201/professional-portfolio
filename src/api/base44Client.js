@@ -7,7 +7,7 @@ const siteSettings = [{
   phone: '065 838 0423',
   location: 'Khayelitsha, Cape Town, 7784',
   github: 'Abenathi201',
-  bio: 'Junior software developer with hands-on experience in full-stack web development and 8 months of professional experience in software testing and database management. Currently working as a Software Support and Testing Agent, gaining real-world exposure to software workflows, bug identification, and database operations.',
+  bio: 'I got into coding because a mentor from my neighborhood saw something in me I didn\'t see in myself. I didn\'t have direction back then. Honestly, I still don\'t have it all figured out. But I\'m working towards something and that\'s what matters.\n\nI did a 6-month bootcamp at Life Choices Academy where I really got my hands dirty with HTML, CSS, JavaScript, Bootstrap, Vue.js, Node.js and MySQL. That\'s where it clicked: the problem-solving, the building and the satisfaction when something finally works after hours of breaking it.\n\nNow I\'m working as a Software Support and Testing Agent at KwantuIT. I\'m the person who finds what breaks before users do. I\'ve logged over 100 bugs across different systems and what I\'ve learned is this: good testing isn\'t just clicking buttons and filling out forms. It\'s thinking about edge cases, asking "what if someone does this wrong" and catching problems before they become disasters. I write SQL queries to manage databases and build internal tools to automate the repetitive stuff so people can focus on work that actually matters.\n\nI build web applications with React and Node.js, stuff that needs to handle real data, real users and real problems. I\'m drawn to projects where the backend logic actually has to work correctly because people depend on it. I care about things working smoothly and looking good while doing it.\n\nI\'m here because I want to create software that actually solves problems, not just check boxes on a ticket. If you need someone who questions assumptions, spots patterns and won\'t just build something because that\'s what the spec says, someone who thinks about why we\'re building it in the first place, let\'s talk.',
 }];
 
 const cvData = [
@@ -20,7 +20,7 @@ const cvData = [
       email: 'abenathi.sindaphi201@gmail.com',
       location: 'Khayelitsha, Cape Town, 7784',
       github: 'https://github.com/Abenathi201',
-      portfolio: 'https://rickydavincistudios.vercel.app'
+      portfolio: 'https://professional-portfolio-phi-kohl.vercel.app'
     },
     summary: 'Junior software developer with hands-on experience in full-stack web development and 8 months of professional experience in software testing and database management. Currently working as a Software Support and Testing Agent, gaining real-world exposure to software workflows, bug identification, and database operations. Self-taught in modern web technologies with a focus on building responsive, user-friendly applications using React, Node.js, and MySQL.',
     skills: [
@@ -69,12 +69,12 @@ const cvData = [
     ],
     projects: [
       {
-        title: 'Ricky DaVinci Studios Portfolio',
-        link: 'https://rickydavincistudios.vercel.app',
+        title: 'Professional Portfolio Website',
+        link: 'https://professional-portfolio-phi-kohl.vercel.app',
         tech: 'React, Vite, Tailwind CSS, Framer Motion, React Router, React Query',
         description: [
-          'Digital portfolio showcasing urban sketch artwork with authentic sketchbook aesthetic including hand-drawn elements, masking tape effects, and coffee stains',
-          'Implemented portfolio gallery with location-based filtering, lightbox view for full-screen artwork display, and responsive design for mobile and desktop',
+          'Personal portfolio website showcasing development projects and technical skills with modern design and smooth animations',
+          'Implemented responsive design with dynamic CV generation, project showcase, and contact form integration',
           'Built with modern React 19 features and optimized animations using Framer Motion for smooth user interactions'
         ]
       },
@@ -111,7 +111,7 @@ const cvData = [
       email: 'abenathi.sindaphi201@gmail.com',
       location: 'Khayelitsha, Cape Town, 7784',
       github: 'https://github.com/Abenathi201',
-      portfolio: 'https://rickydavincistudios.vercel.app'
+      portfolio: 'https://professional-portfolio-phi-kohl.vercel.app'
     },
     summary: 'Detail-oriented Software Support and Testing Agent with 8 months of hands-on experience in QA testing, database management, and technical support. Proven track record of identifying and documenting 100+ bugs, developing comprehensive test cases, and maintaining system integrity through SQL database operations. Strong problem-solving skills with the ability to troubleshoot complex workflows and provide user support in fast-paced environments.',
     skills: [

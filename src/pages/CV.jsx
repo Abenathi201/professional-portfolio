@@ -45,7 +45,7 @@ export default function CV() {
         scale: 2,
         useCORS: true,
         letterRendering: true,
-        backgroundColor: theme === 'light' ? '#ffffff' : '#1a1814'
+        backgroundColor: theme === 'light' ? '#ffffff' : '#0f0e0c'
       },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
@@ -78,7 +78,7 @@ export default function CV() {
     muted: '#6b6b6b',
     border: '#d1d5db'
   } : {
-    bg: '#1a1814',
+    bg: '#0f0e0c',
     text: '#f5f0e6',
     accent: '#d4622a',
     muted: '#c4beb2',
@@ -198,14 +198,13 @@ export default function CV() {
         style={{
           backgroundColor: themeColors.bg,
           color: themeColors.text,
-          minHeight: '100vh',
           maxWidth: '1024px',
           margin: '0 auto'
         }}
       >
         <style>{`
           .cv-content {
-            padding: 1.5rem 2rem;
+            padding: 1.25rem 2rem 1rem;
             font-size: 14px;
           }
           .cv-content h1, .cv-content h2, .cv-content h3 {
@@ -241,20 +240,19 @@ export default function CV() {
             break-inside: avoid;
           }
           .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            align-items: start;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
           }
           .skills-grid > div {
-            height: 100%;
+            width: 100%;
           }
         `}</style>
         {/* Header */}
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative pb-4 mb-6 print-section"
+          className="relative pb-3 mb-5 print-section"
           style={{ borderBottom: `2px solid ${themeColors.accent}` }}
         >
           <h1
@@ -271,13 +269,7 @@ export default function CV() {
           </p>
 
           {/* Contact info */}
-          <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-xs" style={{ color: themeColors.muted }}>
-            {cvData.contact?.phone && (
-              <div className="flex items-center gap-2">
-                <Phone className="w-3 h-3 flex-shrink-0" />
-                <span>{cvData.contact.phone}</span>
-              </div>
-            )}
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1 font-mono text-xs" style={{ color: themeColors.muted }}>
             {cvData.contact?.email && (
               <div className="flex items-center gap-2">
                 <Mail className="w-3 h-3 flex-shrink-0" />
@@ -286,10 +278,10 @@ export default function CV() {
                 </a>
               </div>
             )}
-            {cvData.contact?.location && (
+            {cvData.contact?.phone && (
               <div className="flex items-center gap-2">
-                <MapPin className="w-3 h-3 flex-shrink-0" />
-                <span>{cvData.contact.location}</span>
+                <Phone className="w-3 h-3 flex-shrink-0" />
+                <span>{cvData.contact.phone}</span>
               </div>
             )}
             {cvData.contact?.github && (
@@ -300,8 +292,14 @@ export default function CV() {
                 </a>
               </div>
             )}
+            {cvData.contact?.location && (
+              <div className="flex items-center gap-2">
+                <MapPin className="w-3 h-3 flex-shrink-0" />
+                <span>{cvData.contact.location}</span>
+              </div>
+            )}
             {cvData.contact?.portfolio && (
-              <div className="flex items-center gap-2 col-span-2">
+              <div className="flex items-center gap-2">
                 <ExternalLink className="w-3 h-3 flex-shrink-0" />
                 <a href={cvData.contact.portfolio} target="_blank" rel="noopener noreferrer" style={{ color: themeColors.muted }}>
                   {cvData.contact.portfolio}
@@ -317,13 +315,13 @@ export default function CV() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mb-5 print-section"
+            className="mb-4 print-section"
           >
             <h2 className="font-display text-xl font-black uppercase tracking-tight mb-2 flex items-center gap-2" style={{ color: themeColors.text }}>
               <span style={{ color: themeColors.accent }}>•</span>
               Professional Summary
             </h2>
-            <p className="leading-relaxed text-sm" style={{ color: themeColors.muted }}>
+            <p className="text-sm" style={{ color: themeColors.muted, lineHeight: '1.7' }}>
               {cvData.summary}
             </p>
           </motion.section>
@@ -335,7 +333,7 @@ export default function CV() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mb-5 print-section"
+            className="mb-4 print-section"
           >
             <h2 className="font-display text-xl font-black uppercase tracking-tight mb-2 flex items-center gap-2" style={{ color: themeColors.text }}>
               <span style={{ color: themeColors.accent }}>•</span>
@@ -344,12 +342,12 @@ export default function CV() {
             <div className="skills-grid">
               {cvData.skills.map((skillGroup, index) => (
                 <div key={index} className="relative pl-3 border-l-2" style={{ borderColor: `${themeColors.border}33` }}>
-                  <h3 className="font-mono text-xs font-bold uppercase tracking-wider mb-1.5" style={{ color: themeColors.accent }}>
+                  <h3 className="font-mono text-xs font-bold uppercase tracking-wider mb-1" style={{ color: themeColors.accent }}>
                     {skillGroup.category}
                   </h3>
                   <ul className="space-y-0.5">
                     {skillGroup.items.map((skill, idx) => (
-                      <li key={idx} className="font-mono text-xs" style={{ color: themeColors.muted }}>
+                      <li key={idx} className="font-mono text-xs leading-relaxed" style={{ color: themeColors.muted }}>
                         {skill}
                       </li>
                     ))}
@@ -366,15 +364,14 @@ export default function CV() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="mb-5 print-section"
+            className="mb-4 print-section"
           >
             <h2 className="font-display text-xl font-black uppercase tracking-tight mb-2 flex items-center gap-2" style={{ color: themeColors.text }}>
               <span style={{ color: themeColors.accent }}>•</span>
               Professional Experience
             </h2>
             {cvData.experience.map((job, index) => (
-              <div key={index} className="mb-4 last:mb-0 relative pl-5 border-l-2" style={{ borderColor: themeColors.accent }}>
-                <div className="absolute -left-1.5 top-0 w-2.5 h-2.5 transform rotate-45" style={{ backgroundColor: themeColors.accent }} />
+              <div key={index} className="mb-3 last:mb-0">
                 <h3 className="font-display text-base font-bold tracking-tight" style={{ color: themeColors.text }}>
                   {job.title}
                 </h3>
@@ -383,8 +380,8 @@ export default function CV() {
                 </p>
                 <ul className="mt-2 space-y-1">
                   {job.responsibilities.map((item, idx) => (
-                    <li key={idx} className="text-sm leading-snug flex gap-2" style={{ color: themeColors.muted }}>
-                      <span className="mt-1 flex-shrink-0" style={{ color: themeColors.accent }}>◆</span>
+                    <li key={idx} className="text-sm flex" style={{ color: themeColors.muted, lineHeight: '1.5' }}>
+                      <span className="mr-2 flex-shrink-0" style={{ color: themeColors.accent }}>◆</span>
                       <span className="flex-1">{item}</span>
                     </li>
                   ))}
@@ -400,15 +397,15 @@ export default function CV() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="mb-5 print-section"
+            className={cvData.education && cvData.education.length > 0 ? "mb-4 print-section" : "print-section"}
           >
             <h2 className="font-display text-xl font-black uppercase tracking-tight mb-2 flex items-center gap-2" style={{ color: themeColors.text }}>
               <span style={{ color: themeColors.accent }}>•</span>
               Projects
             </h2>
             {cvData.projects.map((project, index) => (
-              <div key={index} className="mb-4 last:mb-0 p-4 border" style={{ backgroundColor: `${themeColors.bg}33`, borderColor: `${themeColors.border}10` }}>
-                <div className="flex items-start justify-between gap-4 mb-1">
+              <div key={index} className="mb-3 last:mb-0 p-3 border" style={{ backgroundColor: `${themeColors.bg}33`, borderColor: `${themeColors.border}10` }}>
+                <div className="flex items-center justify-between gap-4 mb-1">
                   <h3 className="font-display text-base font-bold tracking-tight" style={{ color: themeColors.text }}>
                     {project.title}
                   </h3>
@@ -417,7 +414,7 @@ export default function CV() {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="transition-colors no-print"
+                      className="transition-colors no-print flex-shrink-0"
                       style={{ color: themeColors.accent }}
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
@@ -429,8 +426,8 @@ export default function CV() {
                 </p>
                 <ul className="space-y-1">
                   {project.description.map((item, idx) => (
-                    <li key={idx} className="text-sm leading-snug flex gap-2" style={{ color: themeColors.muted }}>
-                      <span className="mt-1 flex-shrink-0" style={{ color: themeColors.accent }}>◆</span>
+                    <li key={idx} className="text-sm flex" style={{ color: themeColors.muted, lineHeight: '1.5' }}>
+                      <span className="mr-2 flex-shrink-0" style={{ color: themeColors.accent }}>◆</span>
                       <span className="flex-1">{item}</span>
                     </li>
                   ))}
@@ -446,14 +443,14 @@ export default function CV() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="mb-5 print-section"
+            className="print-section"
           >
             <h2 className="font-display text-xl font-black uppercase tracking-tight mb-2 flex items-center gap-2" style={{ color: themeColors.text }}>
               <span style={{ color: themeColors.accent }}>•</span>
               Education
             </h2>
             {cvData.education.map((edu, index) => (
-              <div key={index} className="mb-2 last:mb-0">
+              <div key={index} className="mb-1.5 last:mb-0">
                 <h3 className="font-display text-base font-bold tracking-tight" style={{ color: themeColors.text }}>
                   {edu.degree}
                 </h3>
@@ -464,13 +461,6 @@ export default function CV() {
             ))}
           </motion.section>
         )}
-
-        {/* Footer decoration */}
-        <div className="mt-6 pt-4 border-t text-center" style={{ borderColor: `${themeColors.border}10` }}>
-          <p className="font-mono text-xs" style={{ color: `${themeColors.muted}80` }}>
-            — Designed with controlled chaos —
-          </p>
-        </div>
       </div>
     </>
   );
