@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
-import HalftoneLoader from '@/components/ui/HalftoneLoader';
+import HalftoneLoader from '@/components/ui/HalfToneLoader';
 import GlitchText from '@/components/ui/GlitchText';
 
 export default function ProjectDetail() {

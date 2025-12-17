@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { ArrowUpRight } from 'lucide-react';
-import HalftoneLoader from '@/components/ui/HalftoneLoader';
+import HalftoneLoader from '@/components/ui/HalfToneLoader';
 
 const CATEGORIES = [
   { value: 'all', label: 'All Work' },

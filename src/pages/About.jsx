@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import GlitchText from '@/components/ui/GlitchText';
-import HalftoneLoader from '@/components/ui/HalftoneLoader';
+import HalftoneLoader from '@/components/ui/HalfToneLoader';
 
 export default function About() {
   const { data: settingsData, isLoading } = useQuery({
