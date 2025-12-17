@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* Loading dots animation */
+@keyframes dotFade {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-dot-1 {
+  animation: dotFade 1.5s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.animate-dot-2 {
+  animation: dotFade 1.5s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.animate-dot-3 {
+  animation: dotFade 1.5s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
