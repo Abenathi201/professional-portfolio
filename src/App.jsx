@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
@@ -8,9 +8,11 @@ import Home from '@/pages/Home';
 import Work from '@/pages/Work';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
-import CV from '@/pages/CV';
 import ProjectDetails from '@/pages/ProjectDetails';
 import Loader from '@/components/ui/Loader';
+
+// Lazy load CV page (includes heavy html2pdf.js library)
+const CV = lazy(() => import('@/pages/CV'));
 
 // Create a React Query client
 const queryClient = new QueryClient({
@@ -61,7 +63,9 @@ export default function App() {
             } />
             <Route path="/cv" element={
               <Layout currentPageName="CV">
-                <CV />
+                <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><p className="font-mono text-sm text-[#c4beb2]">Loading CV...</p></div>}>
+                  <CV />
+                </Suspense>
               </Layout>
             } />
             <Route path="/contact" element={

@@ -18,6 +18,7 @@ export default defineConfig({
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'framer-motion': ['framer-motion'],
           'lucide': ['lucide-react'],
+          'html2pdf': ['html2pdf.js'],
         },
       },
     },
