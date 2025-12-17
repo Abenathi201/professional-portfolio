@@ -134,24 +134,28 @@ export default function About() {
               
               {/* Professional links */}
               <div className="flex flex-wrap gap-4 mt-12">
-                {settings.github && (
-                  <a
-                    href={`https://github.com/${settings.github}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-mono text-sm text-[#f5f0e6] px-4 py-2 border border-[#c4beb2]/30 hover:border-[#d4622a] hover:text-[#d4622a] transition-colors"
-                  >
-                    GitHub
-                  </a>
-                )}
-                {settings.email && (
-                  <a
-                    href={`mailto:${settings.email}`}
-                    className="font-mono text-sm text-[#f5f0e6] px-4 py-2 border border-[#c4beb2]/30 hover:border-[#d4622a] hover:text-[#d4622a] transition-colors"
-                  >
-                    Email
-                  </a>
-                )}
+                <a
+                  href={'https://github.com/Abenathi201'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-sm text-[#f5f0e6] px-4 py-2 border border-[#c4beb2]/30 hover:border-[#d4622a] hover:text-[#d4622a] transition-colors"
+                >
+                  GitHub
+                </a>
+                <a
+                  href={settings.linkedin || 'https://www.linkedin.com/in/abenathi-sindapi-420969270/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-sm text-[#f5f0e6] px-4 py-2 border border-[#c4beb2]/30 hover:border-[#d4622a] hover:text-[#d4622a] transition-colors"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href={`mailto:${settings.email || 'abenathi.sindaphi201@gmail.com'}`}
+                  className="font-mono text-sm text-[#f5f0e6] px-4 py-2 border border-[#c4beb2]/30 hover:border-[#d4622a] hover:text-[#d4622a] transition-colors"
+                >
+                  Email
+                </a>
                 <a
                   href="/Abenathi_Sindapi_Resume.pdf"
                   download

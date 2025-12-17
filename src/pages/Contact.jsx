@@ -37,21 +37,20 @@ export default function Contact() {
     
     try {
       // Send email to the artist
-      if (settings.email) {
-        await base44.integrations.Core.SendEmail({
-          to: settings.email,
-          subject: formData.subject || `New message from ${formData.name}`,
-          body: `
-Name: ${formData.name}
-Email: ${formData.email}
-Subject: ${formData.subject || 'No subject'}
+      const recipientEmail = settings.email || 'abenathi.sindaphi201@gmail.com';
+      await base44.integrations.Core.SendEmail({
+        to: recipientEmail,
+        subject: formData.subject || `New message from ${formData.name}`,
+        body: `
+        Name: ${formData.name}
+        Email: ${formData.email}
+        Subject: ${formData.subject || 'No subject'}
 
-Message:
-${formData.message}
-          `.trim()
-        });
-      }
-      
+        Message:
+        ${formData.message}
+        `.trim()
+      });
+
       toast.success('Message sent successfully!');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
@@ -101,25 +100,23 @@ ${formData.message}
             
             {/* Contact details */}
             <div className="space-y-6">
-              {settings.email && (
-                <a 
-                  href={`mailto:${settings.email}`}
-                  className="group flex items-center gap-4"
-                >
-                  <div className="w-12 h-12 rounded-full border border-[#c4beb2]/30 flex items-center justify-center group-hover:border-[#d4622a] group-hover:bg-[#d4622a]/10 transition-all">
-                    <Mail className="w-5 h-5 text-[#c4beb2] group-hover:text-[#d4622a] transition-colors" />
-                  </div>
-                  <div>
-                    <span className="font-mono text-xs text-[#c4beb2]/70 uppercase tracking-wider block">
-                      Email
-                    </span>
-                    <span className="text-[#f5f0e6] group-hover:text-[#d4622a] transition-colors">
-                      {settings.email}
-                    </span>
-                  </div>
-                </a>
-              )}
-              
+              <a
+                href={`mailto:${settings.email || 'abenathi.sindaphi201@gmail.com'}`}
+                className="group flex items-center gap-4"
+              >
+                <div className="w-12 h-12 rounded-full border border-[#c4beb2]/30 flex items-center justify-center group-hover:border-[#d4622a] group-hover:bg-[#d4622a]/10 transition-all">
+                  <Mail className="w-5 h-5 text-[#c4beb2] group-hover:text-[#d4622a] transition-colors" />
+                </div>
+                <div>
+                  <span className="font-mono text-xs text-[#c4beb2]/70 uppercase tracking-wider block">
+                    Email
+                  </span>
+                  <span className="text-[#f5f0e6] group-hover:text-[#d4622a] transition-colors">
+                    {settings.email || 'abenathi.sindaphi201@gmail.com'}
+                  </span>
+                </div>
+              </a>
+
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full border border-[#c4beb2]/30 flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-[#c4beb2]" />
@@ -129,7 +126,7 @@ ${formData.message}
                     Based in
                   </span>
                   <span className="text-[#f5f0e6]">
-                    Available Worldwide
+                    Cape Town, South Africa
                   </span>
                 </div>
               </div>
@@ -141,6 +138,24 @@ ${formData.message}
                 Follow
               </span>
               <div className="flex flex-wrap gap-3">
+                <a
+                  href={'https://github.com/Abenathi201'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-2 font-mono text-sm text-[#f5f0e6] px-4 py-2 border border-[#c4beb2]/30 hover:border-[#d4622a] hover:text-[#d4622a] transition-all"
+                >
+                  GitHub
+                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+                <a
+                  href={settings.linkedin || 'https://www.linkedin.com/in/abenathi-sindapi-420969270/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-2 font-mono text-sm text-[#f5f0e6] px-4 py-2 border border-[#c4beb2]/30 hover:border-[#d4622a] hover:text-[#d4622a] transition-all"
+                >
+                  LinkedIn
+                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
                 {settings.instagram && (
                   <a
                     href={`https://instagram.com/${settings.instagram.replace('@', '')}`}

@@ -56,6 +56,22 @@ export default function Footer({ settings = {} }) {
           <div>
             <h4 className="font-mono text-xs text-[#d4622a] uppercase tracking-[0.2em] mb-4">Connect</h4>
             <nav className="flex flex-col gap-2">
+              <a
+                href={'https://github.com/Abenathi201'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-sm text-[#c4beb2] hover:text-[#f5f0e6] transition-colors w-fit"
+              >
+                GitHub
+              </a>
+              <a
+                href={settings.linkedin || 'https://www.linkedin.com/in/abenathi-sindapi-420969270/'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-sm text-[#c4beb2] hover:text-[#f5f0e6] transition-colors w-fit"
+              >
+                LinkedIn
+              </a>
               {settings.instagram && (
                 <a
                   href={`https://instagram.com/${settings.instagram.replace('@', '')}`}
@@ -86,14 +102,12 @@ export default function Footer({ settings = {} }) {
                   Behance
                 </a>
               )}
-              {settings.email && (
-                <a
-                  href={`mailto:${settings.email}`}
-                  className="font-mono text-sm text-[#c4beb2] hover:text-[#f5f0e6] transition-colors w-fit"
-                >
-                  Email
-                </a>
-              )}
+              <a
+                href={`mailto:${settings.email || 'abenathi.sindaphi201@gmail.com'}`}
+                className="font-mono text-sm text-[#c4beb2] hover:text-[#f5f0e6] transition-colors w-fit"
+              >
+                Email
+              </a>
             </nav>
           </div>
         </div>
