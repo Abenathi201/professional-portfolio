@@ -1,0 +1,29 @@
+.cv-content {
+  padding: 1.25rem 2rem 1rem;
+  font-size: 14px;
+}
+
+.print-section {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.cv-content li {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.cv-content div[class*="mb-"] {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.skills-grid > div {
+  width: 100%;
+}

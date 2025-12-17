@@ -156,13 +156,6 @@ export default function About() {
                 >
                   Email
                 </a>
-                <a
-                  href="/Abenathi_Sindapi_Resume.pdf"
-                  download
-                  className="font-mono text-sm text-[#f5f0e6] px-4 py-2 border border-[#c4beb2]/30 hover:border-[#d4622a] hover:text-[#d4622a] transition-colors"
-                >
-                  Download CV
-                </a>
               </div>
             </div>
           </motion.div>

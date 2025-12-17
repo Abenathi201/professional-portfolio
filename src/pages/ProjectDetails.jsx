@@ -1,50 +1,28 @@
 import React, { useEffect } from 'react';
-import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { projects } from '@/data/data';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
-import HalftoneLoader from '@/components/ui/HalfToneLoader';
 import GlitchText from '@/components/ui/GlitchText';
 
 export default function ProjectDetail() {
   const urlParams = new URLSearchParams(window.location.search);
   const projectId = urlParams.get('id');
-  
+
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [projectId]);
-  
-  const { data: project, isLoading } = useQuery({
-    queryKey: ['project', projectId],
-    queryFn: async () => {
-      const projects = await base44.entities.Project.filter({ id: projectId });
-      return projects[0];
-    },
-    enabled: !!projectId,
-  });
-  
-  // Fetch all projects for navigation
-  const { data: allProjects } = useQuery({
-    queryKey: ['allProjects'],
-    queryFn: () => base44.entities.Project.list('order'),
-  });
-  
+
+  const project = projects.find(p => p.id === projectId);
+  const allProjects = projects;
+
   // Find next project
   const currentIndex = allProjects?.findIndex(p => p.id === projectId);
   const nextProject = allProjects && currentIndex !== -1 
     ? allProjects[(currentIndex + 1) % allProjects.length] 
     : null;
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <HalftoneLoader />
-      </div>
-    );
-  }
 
   if (!project) {
     return (

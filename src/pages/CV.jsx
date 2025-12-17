@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { cvData as cvDataSource } from '@/data/data';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Download, Mail, Github, ExternalLink, Phone, MapPin, X, Sun, Moon } from 'lucide-react';
 import { toast } from 'sonner';
 import html2pdf from 'html2pdf.js';
+import '@/styles/cv.css';
 
 export default function CV() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -14,13 +14,7 @@ export default function CV() {
   const [showThemeModal, setShowThemeModal] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState('dark');
 
-  const { data: cvData } = useQuery({
-    queryKey: ['cv', cvSlug],
-    queryFn: async () => {
-      const cvs = await base44.entities.CV.filter({ slug: cvSlug });
-      return cvs[0];
-    },
-  });
+  const cvData = cvSlug === 'qa-tester' ? cvDataSource.qaTester : cvDataSource.developer;
 
   const handleDownloadClick = () => {
     setShowThemeModal(true);
@@ -34,6 +28,11 @@ export default function CV() {
     await new Promise(resolve => setTimeout(resolve, 100));
 
     const element = cvRef.current;
+
+    // Temporarily set background for PDF
+    const bgColor = theme === 'light' ? '#ffffff' : '#0f0e0c';
+    element.style.backgroundColor = bgColor;
+
     const cvType = cvSlug === 'developer' ? 'Developer' : 'QA_Tester';
     const filename = `Abenathi_Sindapi_${cvType}_CV.pdf`;
 
@@ -45,7 +44,7 @@ export default function CV() {
         scale: 2,
         useCORS: true,
         letterRendering: true,
-        backgroundColor: theme === 'light' ? '#ffffff' : '#0f0e0c'
+        backgroundColor: bgColor
       },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
       pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
@@ -54,21 +53,17 @@ export default function CV() {
     try {
       await html2pdf().set(opt).from(element).save();
       toast.success('CV downloaded successfully!');
+      // Remove background after download
+      element.style.backgroundColor = '';
       // Reset to dark theme after download
       setSelectedTheme('dark');
     } catch (error) {
       toast.error('Failed to download CV. Please try again.');
       console.error('PDF generation error:', error);
+      // Remove background on error too
+      element.style.backgroundColor = '';
     }
   };
-
-  if (!cvData) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="font-mono text-sm text-[#c4beb2]">Loading CV...</p>
-      </div>
-    );
-  }
 
   // Theme colors
   const themeColors = selectedTheme === 'light' ? {
@@ -196,16 +191,14 @@ export default function CV() {
         ref={cvRef}
         className="cv-content"
         style={{
-          backgroundColor: themeColors.bg,
           color: themeColors.text,
           maxWidth: '1024px',
           margin: '0 auto'
         }}
       >
         <style>{`
-          .cv-content {
-            padding: 1.25rem 2rem 1rem;
-            font-size: 14px;
+          .cv-content * {
+            background-color: transparent !important;
           }
           .cv-content h1, .cv-content h2, .cv-content h3 {
             color: ${themeColors.text} !important;
@@ -224,28 +217,8 @@ export default function CV() {
           .cv-content [class*="border-"] {
             border-color: ${themeColors.border}33 !important;
           }
-          .cv-content [class*="bg-["] {
-            background-color: ${themeColors.bg}33 !important;
-          }
-          .print-section {
-            page-break-inside: avoid;
-            break-inside: avoid;
-          }
-          .cv-content li {
-            page-break-inside: avoid;
-            break-inside: avoid;
-          }
-          .cv-content div[class*="mb-"] {
-            page-break-inside: avoid;
-            break-inside: avoid;
-          }
-          .skills-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-          }
-          .skills-grid > div {
-            width: 100%;
+          .cv-content .project-card {
+            background-color: rgba(255, 255, 255, 0.02) !important;
           }
         `}</style>
         {/* Header */}
@@ -404,7 +377,7 @@ export default function CV() {
               Projects
             </h2>
             {cvData.projects.map((project, index) => (
-              <div key={index} className="mb-3 last:mb-0 p-3 border" style={{ backgroundColor: `${themeColors.bg}33`, borderColor: `${themeColors.border}10` }}>
+              <div key={index} className="mb-3 last:mb-0 p-3 border project-card" style={{ borderColor: `${themeColors.border}10` }}>
                 <div className="flex items-center justify-between gap-4 mb-1">
                   <h3 className="font-display text-base font-bold tracking-tight" style={{ color: themeColors.text }}>
                     {project.title}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { siteSettings } from '@/data/data';
 import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -17,13 +16,8 @@ export default function Contact() {
     message: ''
   });
   const [sending, setSending] = useState(false);
-  
-  const { data: settingsData } = useQuery({
-    queryKey: ['siteSettings'],
-    queryFn: () => base44.entities.SiteSettings.list(),
-  });
-  
-  const settings = settingsData?.[0] || {};
+
+  const settings = siteSettings;
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,22 +28,20 @@ export default function Contact() {
     }
     
     setSending(true);
-    
-    try {
-      // Send email to the artist
-      const recipientEmail = settings.email || 'abenathi.sindaphi201@gmail.com';
-      await base44.integrations.Core.SendEmail({
-        to: recipientEmail,
-        subject: formData.subject || `New message from ${formData.name}`,
-        body: `
-        Name: ${formData.name}
-        Email: ${formData.email}
-        Subject: ${formData.subject || 'No subject'}
 
-        Message:
-        ${formData.message}
-        `.trim()
+    // Simulate sending (replace with actual email service like EmailJS, Formspree, etc.)
+    try {
+      // TODO: Integrate with a real email service
+      // For now, just log the form data and show success
+      console.log('Contact form submitted:', {
+        to: settings.email,
+        from: formData.email,
+        subject: formData.subject || `New message from ${formData.name}`,
+        message: formData.message
       });
+
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       toast.success('Message sent successfully!');
       setFormData({ name: '', email: '', subject: '', message: '' });

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
+import { projects } from '@/data/data';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { ArrowUpRight } from 'lucide-react';
-import HalftoneLoader from '@/components/ui/HalfToneLoader';
 
 const CATEGORIES = [
   { value: 'all', label: 'All Work' },
@@ -18,14 +16,9 @@ const CATEGORIES = [
 export default function Work() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [hoveredProject, setHoveredProject] = useState(null);
-  
-  const { data: projects, isLoading } = useQuery({
-    queryKey: ['allProjects'],
-    queryFn: () => base44.entities.Project.list('order'),
-  });
-  
-  const filteredProjects = activeCategory === 'all' 
-    ? projects 
+
+  const filteredProjects = activeCategory === 'all'
+    ? projects
     : projects?.filter(p => p.category === activeCategory);
 
   return (
@@ -73,12 +66,7 @@ export default function Work() {
       
       {/* Project grid */}
       <section className="px-6 md:px-12 lg:px-20 pb-20">
-        {isLoading ? (
-          <div className="flex justify-center py-20">
-            <HalftoneLoader />
-          </div>
-        ) : (
-          <motion.div 
+        <motion.div 
             layout
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
           >
@@ -164,10 +152,9 @@ export default function Work() {
               ))}
             </AnimatePresence>
           </motion.div>
-        )}
-        
+
         {/* Empty state */}
-        {!isLoading && (!filteredProjects || filteredProjects.length === 0) && (
+        {(!filteredProjects || filteredProjects.length === 0) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
